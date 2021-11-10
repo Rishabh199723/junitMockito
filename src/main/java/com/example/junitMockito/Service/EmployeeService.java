@@ -15,4 +15,10 @@ public class EmployeeService {
         System.out.println("In save.................");
         return employeeRepository.save(employee);
     }
+
+    public Employee getEmployee(Long id) {
+        System.out.println("In Get employee.................");
+        System.out.println("employee repo==="+employeeRepository);
+        return employeeRepository.getById(id);
+    }
 }

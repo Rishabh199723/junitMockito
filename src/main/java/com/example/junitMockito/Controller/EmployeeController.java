@@ -25,7 +25,7 @@ public class EmployeeController {
     @PostMapping("/saveEmployee")
     public Response saveEmployee(@RequestBody Employee employee) {
        Employee employee1 = employeeService.saveEmployee(employee);
-//        System.out.println("repo===="+employeeRepository);
+        System.out.println("repo===="+employeeService);
 //        Employee employee1 = employeeRepository.save(employee);
        System.out.println("employee---"+employee1);
        return new Response("saved users: 1", true);
