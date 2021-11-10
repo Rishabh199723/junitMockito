@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,38 +31,38 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(EmployeeController.class)
+//@WebMvcTest(EmployeeController.class)
 //@RunWith(SpringRunner.class)
-//@SpringBootTest
+@SpringBootTest
 public class RestControllerTest {
 
-    @MockBean
+    @Mock
     EmployeeRepository employeeRepository;
     @InjectMocks
     EmployeeController employeeController;
 
-    @Autowired
+
     public MockMvc mockMvc;
 
-    /*@MockBean
-    EmployeeService employeeService;*/
+    @Mock
+    EmployeeService employeeService;
     /*@Autowired
     public static WebApplicationContext webApplicationContext;*/
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    /*@BeforeEach
+    @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
 
-    }*/
+    }
 
     @Test
     public void addEmployee() throws Exception {
         Employee employee = new Employee(1L, "Rish", 23);
         String data = objectMapper.writeValueAsString(employee);
         when(employeeRepository.save(ArgumentMatchers.any())).thenReturn(employee);
-//        when(employeeService.saveEmployee(ArgumentMatchers.any())).thenReturn(employee);
+        when(employeeService.saveEmployee(ArgumentMatchers.any())).thenReturn(employee);
         MvcResult result = mockMvc.perform(post("/saveEmployee")
                 .content(data)
                 .contentType(MediaType.APPLICATION_JSON_VALUE))

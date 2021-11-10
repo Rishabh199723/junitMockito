@@ -18,16 +18,15 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-  /*  @Autowired
+    @Autowired
     EmployeeService employeeService;
-*/
 
 
     @PostMapping("/saveEmployee")
     public Response saveEmployee(@RequestBody Employee employee) {
-//       Employee employee1 = employeeService.saveEmployee(employee);
-        System.out.println("repo===="+employeeRepository);
-        Employee employee1 = employeeRepository.save(employee);
+       Employee employee1 = employeeService.saveEmployee(employee);
+//        System.out.println("repo===="+employeeRepository);
+//        Employee employee1 = employeeRepository.save(employee);
        System.out.println("employee---"+employee1);
        return new Response("saved users: 1", true);
     }
